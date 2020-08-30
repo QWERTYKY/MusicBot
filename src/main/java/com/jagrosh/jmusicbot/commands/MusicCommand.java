@@ -42,8 +42,17 @@ public abstract class MusicCommand extends Command {
     }
 
     @Override
-    protected void execute(CommandEvent event) 
-    {
+    protected void execute(CommandEvent event) {
+        // ADD-
+        // BAN Music bot役職は使用させない
+        for (Role role : event.getMember().getRoles())
+        if(role.getId().equals("665877694478680066"))
+        {
+            event.reply(event.getClient().getError()+" You are forbidden to use MusicBot!");
+            return;
+        }
+        // -ADD
+
         Settings settings = event.getClient().getSettingsFor(event.getGuild());
         TextChannel tchannel = settings.getTextChannel(event.getGuild());
         if(tchannel!=null && !event.getTextChannel().equals(tchannel))
