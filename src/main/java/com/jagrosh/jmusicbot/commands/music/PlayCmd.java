@@ -84,6 +84,17 @@ public class PlayCmd extends MusicCommand
             event.reply(builder.toString());
             return;
         }
+
+        // ADD-
+        // 検索機能を無効にする
+        // argsがURLではない場合は実行しない
+        if (!event.getArgs().matches("^(<|)http(s|)://.*") || event.getArgs().matches(".*\\s.*"))
+        {
+            event.reply(event.getClient().getError()+" The search function cannot be used!");
+            return;
+        }
+        // -ADD
+        
         String args = event.getArgs().startsWith("<") && event.getArgs().endsWith(">") 
                 ? event.getArgs().substring(1,event.getArgs().length()-1) 
                 : event.getArgs().isEmpty() ? event.getMessage().getAttachments().get(0).getUrl() : event.getArgs();
